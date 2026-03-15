@@ -1,0 +1,21 @@
+from langchain_ollama.llms import OllamaLLM
+from langchain_core.prompts import ChatPromptTemplate
+
+
+# how to utilize ollama model
+model = OllamaLLM(model="llama3.2")
+
+template = """
+You are an expert in answering questions about a pizza restaurant
+
+Here are some relevant review: {reviews}
+
+Here is the question to answer: {question}
+"""
+
+prompt = ChatPromptTemplate.from_template(template)
+chain = prompt | model
+
+result =chain.invoke({"reviews" : [] , "question":"what is the best pizza in town"})
+
+print(result)
